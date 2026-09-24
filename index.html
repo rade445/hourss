@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تسجيل ساعات العمل اليدوية</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; direction: rtl; text-align: right; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        input[type="text"], input[type="number"], input[type="date"] { width: 90%; padding: 6px; box-sizing: border-box; }
+        button { background-color: #4CAF50; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-size: 16px; margin-top: 10px; }
+        button:hover { background-color: #45a049; }
+        .total-box { margin-top: 20px; font-size: 18px; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 4px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>سجل ساعات العمل اليدوي</h1>
+    <p style="text-align: center; color: #666;">تحكم كامل ويدوي بالكامل - بدون أي مؤقتات أو حسابات تلقائية مزعجة.</p>
+
+    <table id="hoursTable">
+        <thead>
+            <tr>
+                <th>التاريخ</th>
+                <th>اسم المهمة / المشروع</th>
+                <th>عدد الساعات (يدوي)</th>
+                <th>الأجر (€10/ساعة)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="date"></td>
+                <td><input type="text" placeholder="اكتب وصف العمل..."></td>
+                <td><input type="number" step="0.5" class="hours-input" placeholder="0" oninput="calculateTotal()"></td>
+                <td class="pay-cell">€0.00</td>
+            </tr>
+            <tr>
+                <td><input type="date"></td>
+                <td><input type="text" placeholder="اكتب وصف العمل..."></td>
+                <td><input type="number" step="0.5" class="hours-input" placeholder="0" oninput="calculateTotal()"></td>
+                <td class="pay-cell">€0.00</td>
+            </tr>
+            <tr>
+                <td><input type="date"></td>
+                <td><input type="text" placeholder="اكتب وصف العمل..."></td>
+                <td><input type="number" step="0.5" class="hours-input" placeholder="0" oninput="calculateTotal()"></td>
+                <td class="pay-cell">€0.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="addRow()">+ إضافة صف جديد يدوي</button>
+
+    <div class="total-box">
+        إجمالي الساعات: <span id="totalHours">0</span> ساعات | الإجمالي الكلي: <span id="totalPay">€0.00</span>
+    </div>
+</div>
+
+<script>
+    function calculateTotal() {
+        let inputs = document.querySelectorAll('.hours-input');
+        let payCells = document.querySelectorAll('.pay-cell');
+        let totalH = 0;
+        
+        inputs.forEach((input, index) => {
+            let val = parseFloat(input.value) || 0;
+            totalH += val;
+            let pay = val * 10;
+            payCells[index].innerText = '€' + pay.toFixed(2);
+        });
+
+        document.getElementById('totalHours').innerText = totalH;
+        document.getElementById('totalPay').innerText = '€' + (totalH * 10).toFixed(2);
+    }
+
+    function addRow() {
+        let table = document.getElementById('hoursTable').getElementsByTagName('tbody')[0];
+        let newRow = table.insertRow();
+        newRow.innerHTML = 
+            <td><input type="date"></td>
+            <td><input type="text" placeholder="اكتب وصف العمل..."></td>
+            <td><input type="number" step="0.5" class="hours-input" placeholder="0" oninput="calculateTotal()"></td>
+            <td class="pay-cell">€0.00</td>
+        ;
+    }
+</script>
+
+</body>
+</html>
