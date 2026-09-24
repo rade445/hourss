@@ -87,3 +87,241 @@
     </script>
 </body>
 </html>
+[24/09/2026 11:34 م] R: <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم الشخصية والرسمية</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; display: flex; height: 100vh; overflow: hidden; direction: rtl; text-align: right; }
+        
+        /* Sidebar */
+        .sidebar { width: 280px; background-color: #ffffff; border-left: 1px solid #e1e4e8; display: flex; flex-direction: column; padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.02); }
+        .sidebar h2 { font-size: 18px; color: #2c3e50; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #27ae60; }
+        .menu-item { padding: 12px 15px; margin-bottom: 8px; border-radius: 8px; color: #555; text-decoration: none; font-weight: 600; display: flex; align-items: center; transition: 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: right; font-size: 14px; }
+        .menu-item:hover, .menu-item.active { background-color: #e8f8f0; color: #27ae60; }
+        
+        /* Main Content */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header h1 { font-size: 22px; color: #2c3e50; }
+        .badge { display: inline-block; padding: 4px 10px; background: #e8f8f0; color: #27ae60; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        
+        /* Sections */
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+
+        /* Cards Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .card h3 { font-size: 16px; color: #333; margin-bottom: 10px; }
+        .card p { font-size: 13px; color: #666; margin-bottom: 15px; }
+
+        /* Hours Table Styles */
+        .hours-container { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .hours-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .hours-table th, .hours-table td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        .hours-table th { background-color: #27ae60; color: white; font-size: 14px; }
+        .hours-input { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
+        .add-row-btn { margin-top: 15px; padding: 8px 15px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .add-row-btn:hover { background-color: #219653; }
+        .totals { margin-top: 20px; font-size: 16px; font-weight: bold; color: #2c3e50; background: #e8f8f0; padding: 12px; border-radius: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>لوحة التحكم</h2>
+        <button class="menu-item active" onclick="switchSection('photos', this)">📁 الصور الشخصية والرسمية</button>
+        <button class="menu-item" onclick="switchSection('documents', this)">📄 المستندات العامة</button>
+        <button class="menu-item" onclick="switchSection('contracts', this)">📋 أوراق العمل والعقود</button>
+        <button class="menu-item" onclick="switchSection('vacations', this)">🏥 الإجازات والمرضيات</button>
+        <button class="menu-item" onclick="switchSection('behörde', this)">🏛️ أوراق الأوسترلند (Behörde)</button>
+[24/09/2026 11:34 م] R: <button class="menu-item" onclick="switchSection('bank', this)">💳 الحسابات البنكية</button>
+        <button class="menu-item" onclick="switchSection('hours', this)">⏱️ ساعات العمل والجداول</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="main-content">
+        
+        <!-- 1. Photos Section -->
+        <div id="photos" class="section-content active">
+            <div class="header">
+                <h1>الصور الشخصية والرسمية</h1>
+                <span class="badge">إدارة الملفات والبيانات الشخصية</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>صورة جواز السفر (Passfoto)</h3>
+                    <p>خلفية بيضاء مطابقة للمواصفات البيومترية.</p>
+                    <span class="badge">جاهز للطباعة</span>
+                </div>
+                <div class="card">
+                    <h3>صورة الإقامة والتأمين الصحي</h3>
+                    <p>نسخة عالية الدقة للوجهين.</p>
+                    <span class="badge">محدث</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Documents Section -->
+        <div id="documents" class="section-content">
+            <div class="header">
+                <h1>المستندات العامة</h1>
+                <span class="badge">الأوراق الرسمية العامة</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>المستندات الأساسية</h3>
+                    <p>الملفات الشخصية العامة والشهادات.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Contracts Section -->
+        <div id="contracts" class="section-content">
+            <div class="header">
+                <h1>أوراق العمل والعقود</h1>
+                <span class="badge">عقود العمل والاتفاقيات</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>عقد العمل الحالي</h3>
+                    <p>شروط وبنود العمل الموقعة.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Vacations Section -->
+        <div id="vacations" class="section-content">
+            <div class="header">
+                <h1>الإجازات والمرضيات</h1>
+                <span class="badge">متابعة الإجازات والإشعارات الطبية</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>إجازات المرض (Krankenschein)</h3>
+                    <p>أرشيف التقارير الطبية وإشعارات المرض.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Behörde Section -->
+        <div id="behörde" class="section-content">
+            <div class="header">
+                <h1>أوراق الأوسترلند (Änder Behörde)</h1>
+                <span class="badge">معاملات الدوائر الحكومية</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>مواعيد ومراسلات الدوائر</h3>
+                    <p>متابعة الردود والمواعيد الرسمية.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Bank Section -->
+        <div id="bank" class="section-content">
+            <div class="header">
+                <h1>الحسابات البنكية</h1>
+                <span class="badge">البنوك والبطاقات</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>الحساب البنكي الرئيسي</h3>
+                    <p>بيانات الحساب والتحويلات.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Hours & Work Section (Your Dashboard) -->
+        <div id="hours" class="section-content">
+            <div class="header">
+                <h1>سجل ساعات العمل اليدوي</h1>
+                <span class="badge">حساب الساعات والإجمالي بدقة</span>
+            </div>
+[24/09/2026 11:34 م] R: <div class="hours-container">
+                <table class="hours-table" id="hoursTable">
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th>
+                            <th>اسم المهمة / المشروع</th>
+                            <th>عدد الساعات (يدوي)</th>
+                            <th>الأجر (10€ / ساعة)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="date" class="hours-input"></td>
+                            <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                            <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                            <td class="pay-cell">€0.00</td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" class="hours-input"></td>
+                            <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                            <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                            <td class="pay-cell">€0.00</td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" class="hours-input"></td>
+                            <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                            <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                            <td class="pay-cell">€0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="add-row-btn" onclick="addRow()">+ إضافة صف جديد يدوياً</button>
+                <div class="totals" id="totalSummary">
+                    إجمالي الساعات: 0 ساعات | الإجمالي الكلي: €0.00
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Switch between sidebar sections smoothly
+        function switchSection(sectionId, element) {
+            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Calculate hours and total pay dynamically
+        function calculateTotal() {
+            let inputs = document.querySelectorAll('.hours-field');
+            let totalHours = 0;
+            
+            inputs.forEach((input, index) => {
+                let val = parseFloat(input.value) || 0;
+                totalHours += val;
+                let payCells = document.querySelectorAll('.pay-cell');
+                if(payCells[index]) {
+                    payCells[index].innerText = '€' + (val * 10).toFixed(2);
+                }
+            });
+
+            let totalPrice = totalHours * 10;
+            document.getElementById('totalSummary').innerText = إجمالي الساعات: ${totalHours} ساعات | الإجمالي الكلي: €${totalPrice.toFixed(2)};
+        }
+
+        // Add new row to hours table
+        function addRow() {
+            let table = document.getElementById('hoursTable').getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.innerHTML = 
+                <td><input type="date" class="hours-input"></td>
+                <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                <td class="pay-cell">€0.00</td>
+            ;
+        }
+    </script>
+</body>
+</html>
