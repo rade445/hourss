@@ -1,4 +1,76 @@
-let totalPrice = totalHours * 10;
+[24/09/2026 11:30 م] R: <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سجل ساعات العمل اليدوي</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; direction: rtl; text-align: right; }
+        .hours-container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 800px; }
+        h1 { font-size: 22px; color: #2c3e50; margin-bottom: 20px; text-align: center; }
+        .hours-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .hours-table th, .hours-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        .hours-table th { background-color: #27ae60; color: white; font-size: 14px; }
+        .hours-input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; font-size: 14px; }
+        .add-row-btn { margin-top: 20px; padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; display: block; width: 100%; }
+        .add-row-btn:hover { background-color: #219653; }
+        .totals { margin-top: 20px; font-size: 16px; font-weight: bold; color: #2c3e50; background: #e8f8f0; padding: 15px; border-radius: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="hours-container">
+        <h1>سجل ساعات العمل اليدوي</h1>
+        <table class="hours-table" id="hoursTable">
+            <thead>
+                <tr>
+                    <th>التاريخ</th>
+                    <th>اسم المهمة / المشروع</th>
+                    <th>عدد الساعات (يدوي)</th>
+                    <th>الأجر (10€ / ساعة)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="date" class="hours-input"></td>
+                    <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                    <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                    <td class="pay-cell">€0.00</td>
+                </tr>
+                <tr>
+                    <td><input type="date" class="hours-input"></td>
+                    <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                    <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                    <td class="pay-cell">€0.00</td>
+                </tr>
+                <tr>
+                    <td><input type="date" class="hours-input"></td>
+                    <td><input type="text" class="hours-input" placeholder="اكتب وصف العمل..."></td>
+                    <td><input type="number" step="0.5" class="hours-input hours-field" placeholder="0" oninput="calculateTotal()"></td>
+                    <td class="pay-cell">€0.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="add-row-btn" onclick="addRow()">+ إضافة صف جديد يدوياً</button>
+        <div class="totals" id="totalSummary">
+            إجمالي الساعات: 0 ساعات | الإجمالي الكلي: €0.00
+        </div>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            let inputs = document.querySelectorAll('.hours-field');
+            let totalHours = 0;
+            
+            inputs.forEach((input, index) => {
+                let val = parseFloat(input.value) || 0;
+                totalHours += val;
+                let payCells = document.querySelectorAll('.pay-cell');
+                if(payCells[index]) {
+                    payCells[index].innerText = '€' + (val * 10).toFixed(2);
+                }
+            });
+[24/09/2026 11:30 م] R: let totalPrice = totalHours * 10;
             document.getElementById('totalSummary').innerText = إجمالي الساعات: ${totalHours} ساعات | الإجمالي الكلي: €${totalPrice.toFixed(2)};
         }
 
